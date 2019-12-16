@@ -1,3 +1,5 @@
+const path = require('path');
+
 const config = {
   projectName: 'app_all',
   date: '2019-12-11',
@@ -25,6 +27,12 @@ const config = {
     }
   },
   defineConstants: {
+  },
+  alias: {
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@/utils': path.resolve(__dirname, '..', 'src/utils'),
+    "@/images": path.resolve(__dirname, '..', 'src/static/images'),
+    "@/demo": path.resolve(__dirname, '..', '/src/static/demo')
   },
   weapp: {
     module: {
@@ -84,7 +92,8 @@ const config = {
           }
         }
       }
-    }
+    },
+    esnextModules: ['taro-ui']
   }
 }
 

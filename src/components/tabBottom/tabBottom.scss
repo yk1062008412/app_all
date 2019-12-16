@@ -1,0 +1,102 @@
+.tab-bottom-container{
+  height: 50Px;
+  background-color: #F7F7FA;
+  border-top: 1Px solid #F7F7FA;
+  position: fixed;
+  width: 100%;
+  bottom: 0Px;
+  z-index: 99;
+  .tab-list{
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    .tab-info{
+      flex: 1;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-right: 25Px;
+    }
+    .tab-item{
+      font-size: 10Px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      &.active{
+        color: #09BB07;
+      }
+      .tab-icon{
+        width: 27Px;
+        height: 27Px;
+      }
+    }
+    .tab-shopcar{
+      width: 50%;
+      height: 100%;
+      position: relative;
+      .shopcar-image{
+        position: absolute;
+        top: 0Px;
+        left: -25Px;
+        width: 50Px;
+        height: 50Px;
+        background-color: #f55;
+        border-radius: 50%;
+        z-index: 2;
+        border: 3Px solid #333;
+        box-sizing: border-box;
+        .shopcar-icon{
+          width: 35Px;
+          height: 35Px;
+          margin-top: 3Px;
+          margin-left: 4Px;
+        }
+      }
+      .shopcar-info{
+        height: 100%;
+        padding-left: 25Px;
+        background-color: #333;
+        position: relative;
+        .shopcar-goods{
+          height: 100%;
+          color: #ddd;
+          font-size: 18Px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-right: 50%;
+          .shopcar-currency{
+            font-size: 10Px;
+            margin-right: 3Px;
+            position: relative;
+            top: 2Px;
+          }
+        }
+        .shopcar-button{
+          position: absolute;
+          width: 40%;
+          height: 100%;
+          top: 0;
+          right: 0;
+          background-color: #f55;
+          line-height: 100%;
+          font-size: 18Px;
+          color: #ddd;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+      &.empty{
+        .shopcar-image{
+          background-color: #854141;
+        }
+        .shopcar-button{
+          background-color: #666;
+          color: #999;
+        }
+      }
+    }
+  }
+}

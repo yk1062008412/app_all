@@ -1,7 +1,14 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import Index from './pages/index'
-
+import Home from './pages/home/home'
 import './app.scss'
+
+// import shopcar from '@/images/shopcar.png'
+// import shopcarSelect from '@/images/shopcar_select.png'
+// import home from '@/images/home.png'
+// import homeSelect from '@/images/home_select.png'
+// import mine from '@/images/mine.png'
+// import mineSelect from '@/images/mine_select.png'
+
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -20,14 +27,34 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index'
+      "pages/home/home",
+      "pages/shopcar/shopcar",
+      "pages/mine/mine"
     ],
     window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      backgroundTextStyle: "light",
+      navigationBarBackgroundColor: "#fff",
+      navigationBarTitleText: "WeChat",
+      navigationBarTextStyle: "black"
     }
+    // tabBar: {
+    //   list: [{
+    //     "pagePath": "pages/home/home",
+    //     "text": "首页",
+    //     "iconPath": home,
+    //     "selectedIconPath": homeSelect
+    //   },{
+    //     "pagePath": "pages/shopcar/shopcar",
+    //     "text": "购物车",
+    //     "iconPath": shopcar,
+    //     "selectedIconPath": shopcarSelect
+    //   },{
+    //     "pagePath": "pages/mine/mine",
+    //     "text": "我的",
+    //     "iconPath": mine,
+    //     "selectedIconPath": mineSelect
+    //   }]
+    // }
   }
 
   componentDidMount () {}
@@ -42,7 +69,7 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+      <Home />
     )
   }
 }
