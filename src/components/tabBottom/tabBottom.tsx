@@ -35,6 +35,10 @@ export default class TabBottom extends Component <any, any> {
 
   componentDidHide () { }
 
+  handleMine () { // 进入个人中心页面
+    Taro.navigateTo({ url: '/pages/mine/mine' })
+  }
+
   render () {
     const { container } = this.state
     return (
@@ -45,7 +49,7 @@ export default class TabBottom extends Component <any, any> {
               <Image src={HomeSelect} className="tab-icon"/>
               <Text>首页</Text>
             </View>
-            <View className="tab-item">
+            <View className="tab-item" onClick={ this.handleMine.bind(this) }>
               <Image src={Mine} className="tab-icon"/>
               <Text>个人中心</Text>
             </View>

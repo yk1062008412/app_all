@@ -1,0 +1,34 @@
+.address-list-container{
+  padding-top: 10Px;
+  .address-list{
+    .address-item{
+      width: 95%;
+      margin: 10Px auto;
+      border: 1Px dashed #f00;
+      border-radius: 5Px;
+      font-size: 18Px;
+      position: relative;
+      .address-item-content{
+        padding: 5Px 10Px;
+        .address-name{
+          margin-right: 30Px;
+        }
+        .address-tag{
+          position: relative;
+          bottom: 3Px;
+          color: #f00;
+        }
+      }
+      .address-setting{
+        position: absolute;
+        height: 100%;
+        width: 50Px;
+        right: 10Px;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

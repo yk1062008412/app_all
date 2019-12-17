@@ -1,0 +1,16 @@
+.my-order-container{
+  .my-order-card{
+    width: 95%;
+    margin: 0 auto;
+    border: 1Px solid #ccc;
+    border-radius: 5Px;
+    .card-title{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1Px dashed #ccc;
+      font-size: 18Px;
+      padding: 5Px 10Px;
+    }
+  }
+}

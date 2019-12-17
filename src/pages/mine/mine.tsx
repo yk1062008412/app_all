@@ -1,18 +1,19 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
+import { AtList, AtListItem} from 'taro-ui'
+import MyOrder from '@/components/myOrder/myOrder'
 import './mine.scss'
 
-export default class Mine extends Component {
+export default class Mine extends Component <any, any> {
 
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
+  constructor (props) {
+    super(props)
+    this.state = {
+    }
+  }
+
   config: Config = {
-    navigationBarTitleText: '我的'
+    navigationBarTitleText: '个人中心'
   }
 
   componentWillMount () { }
@@ -25,10 +26,19 @@ export default class Mine extends Component {
 
   componentDidHide () { }
 
+  handleAddress () { // 进入地址管理页面
+    Taro.navigateTo({ url: '/pages/address/address' })
+  }
+
   render () {
     return (
       <View className='mine-container'>
-        <Text>Hello Mine Page.!</Text>
+        <View className='my-order-item'>
+          <MyOrder />
+        </View>
+        <AtList>
+          <AtListItem title="地址管理" arrow="right" extraText='进入地址管理' onClick={this.handleAddress.bind(this)} />
+        </AtList>
       </View>
     )
   }

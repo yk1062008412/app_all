@@ -23,6 +23,7 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+      flex: 1;
       &.active{
         color: #09BB07;
       }

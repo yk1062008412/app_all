@@ -28,8 +28,12 @@ class App extends Component {
   config: Config = {
     pages: [
       "pages/home/home",
-      "pages/shopcar/shopcar",
-      "pages/mine/mine"
+      "pages/order/order",
+      "pages/mine/mine",
+      "pages/address/address",
+      "pages/settlement/settlement",
+      "pages/addAddress/addAddress",
+      "pages/orderDetail/orderDetail"
     ],
     window: {
       backgroundTextStyle: "light",
