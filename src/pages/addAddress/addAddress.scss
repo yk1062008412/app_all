@@ -1,0 +1,23 @@
+@import "~taro-ui/dist/style/variables/default.scss";
+
+.add-address-container{
+  padding: 10Px 0;
+  font-size: $at-input-font-size;
+  .address-detail-title{
+    font-size: $at-input-font-size;
+    padding: $spacing-v-lg 0;
+    color: #333;
+    margin-left: $spacing-h-xl;
+  }
+  .address-detail-text{
+    margin: 0 $spacing-v-lg;
+    box-sizing: border-box;
+    width: auto;
+  }
+  .button-group{
+    margin: 20Px;
+    .button-group-item{
+      margin-bottom: 10Px;
+    }
+  }
+}

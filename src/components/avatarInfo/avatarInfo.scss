@@ -1,0 +1,11 @@
+.avatar-info-container{
+  padding: 20Px 20Px 0;
+  .avatar-images{
+    display: flex;
+    align-items: center;
+    .avatar-name{
+      margin-left: 15Px;
+      font-size: 18Px;
+    }
+  }
+}

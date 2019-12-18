@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import { AtList, AtListItem} from 'taro-ui'
 import MyOrder from '@/components/myOrder/myOrder'
 import './mine.scss'
+import AvatarInfo from '@/components/avatarInfo/avatarInfo'
 
 export default class Mine extends Component <any, any> {
 
@@ -33,6 +34,9 @@ export default class Mine extends Component <any, any> {
   render () {
     return (
       <View className='mine-container'>
+        <View>
+          <AvatarInfo />
+        </View>
         <View className='my-order-item'>
           <MyOrder />
         </View>
