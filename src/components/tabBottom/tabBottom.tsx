@@ -19,8 +19,8 @@ export default class TabBottom extends Component <any, any> {
   constructor(props){
     super(props)
     this.state = {
-      // container: ['11']
-      container: []
+      container: ['11']
+      // container: []
     }
   }
 
@@ -39,6 +39,10 @@ export default class TabBottom extends Component <any, any> {
     Taro.navigateTo({ url: '/pages/mine/mine' })
   }
 
+  handleOpenCar () { // 点击打开购物车
+    this.props.handleToggleCar()
+  }
+
   render () {
     const { container } = this.state
     return (
@@ -55,7 +59,7 @@ export default class TabBottom extends Component <any, any> {
             </View>
           </View>
           {
-            container.length ? <View className="tab-shopcar">
+            container.length ? <View className="tab-shopcar" onClick={this.handleOpenCar.bind(this)}>
             <View className="shopcar-image">
               <Image src={ShopCar} className="shopcar-icon" />
             </View>

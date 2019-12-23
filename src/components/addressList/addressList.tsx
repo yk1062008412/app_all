@@ -19,6 +19,10 @@ export default class AddressList extends Component<any, any> {
     console.log(e)
   }
 
+  handleEdit () {
+    Taro.navigateTo({ url: '/pages/addAddress/addAddress' })
+  }
+
   render() {
     return (
       <View className='address-list-container'>
@@ -34,7 +38,7 @@ export default class AddressList extends Component<any, any> {
                 维亚大厦
               </View>
             </View>
-            <View className="address-setting">
+            <View className="address-setting" onClick={this.handleEdit.bind(this)}>
               <AtIcon value='edit' size='20' color='#000'></AtIcon>
             </View>
           </View>
@@ -48,7 +52,7 @@ export default class AddressList extends Component<any, any> {
                 维亚大厦
               </View>
             </View>
-            <View className="address-setting">
+            <View className="address-setting" onClick={this.handleEdit.bind(this)}>
               <AtIcon value='edit' size='20' color='#000'></AtIcon>
             </View>
           </View>
@@ -62,7 +66,7 @@ export default class AddressList extends Component<any, any> {
                 维亚大厦
               </View>
             </View>
-            <View className="address-setting">
+            <View className="address-setting" onClick={this.handleEdit.bind(this)}>
               <AtIcon value='edit' size='20' color='#000'></AtIcon>
             </View>
           </View>

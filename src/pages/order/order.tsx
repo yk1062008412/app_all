@@ -1,6 +1,7 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
+import OrderHistory from '@/components/orderHistory/orderHistory'
 import './order.scss'
 
 export default class Order extends Component<any, any> {
@@ -52,22 +53,22 @@ export default class Order extends Component<any, any> {
           scroll
         >
           <AtTabsPane current={current} index={0} >
-            <View>待付款</View>
+            <View><OrderHistory /></View>
           </AtTabsPane>
           <AtTabsPane current={current} index={1}>
-            <View>待发货</View>
+            <View><OrderHistory /></View>
           </AtTabsPane>
           <AtTabsPane current={current} index={2}>
-            <View>待收货</View>
+            <View><OrderHistory /></View>
           </AtTabsPane>
           <AtTabsPane current={current} index={3}>
-            <View>已完成</View>
+            <View><OrderHistory /></View>
           </AtTabsPane>
           <AtTabsPane current={current} index={4}>
-            <View>已取消</View>
+            <View><OrderHistory /></View>
           </AtTabsPane>
           <AtTabsPane current={current} index={5}>
-            <View>全部</View>
+            <View><OrderHistory /></View>
           </AtTabsPane>
         </AtTabs>
       </View>

@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import Banner from '@/components/banner/banner'
 import TabBottom from '@/components/tabBottom/tabBottom'
 import TabList from '@/components/tabList/tabList'
+import ShopCar from '@/components/shoppCar/shopCar'
 import './home.scss'
 
 export default class Home extends Component <any, any> {
@@ -10,7 +11,8 @@ export default class Home extends Component <any, any> {
   constructor (props) {
     super(props)
     this.state = {
-      tabList: []
+      tabList: [],
+      isOpen: false
     }
   }
 
@@ -46,13 +48,20 @@ export default class Home extends Component <any, any> {
 
   componentDidHide () { }
 
+  toggleCar () { // 打开购物车
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+
   render () {
-    const { tabList } = this.state
+    const { tabList, isOpen } = this.state
     return (
       <View className='home-container'>
         <Banner />
         <TabList tabList={tabList} />
-        <TabBottom />
+        <ShopCar carOpen={isOpen} handleToggleCar={this.toggleCar.bind(this)} />
+        <TabBottom handleToggleCar={this.toggleCar.bind(this)} />
       </View>
     )
   }

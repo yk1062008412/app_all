@@ -4,6 +4,7 @@ import { AtList, AtListItem} from 'taro-ui'
 import MyOrder from '@/components/myOrder/myOrder'
 import './mine.scss'
 import AvatarInfo from '@/components/avatarInfo/avatarInfo'
+import MineBottom from '@/components/mineBottom/mineBottom'
 
 export default class Mine extends Component <any, any> {
 
@@ -43,6 +44,7 @@ export default class Mine extends Component <any, any> {
         <AtList>
           <AtListItem title="地址管理" arrow="right" extraText='进入地址管理' onClick={this.handleAddress.bind(this)} />
         </AtList>
+        <MineBottom />
       </View>
     )
   }

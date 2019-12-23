@@ -1,0 +1,83 @@
+.order-history-container{
+  .order-card{
+    width: 95%;
+    margin: 10Px auto;
+    // background-color: #eee;
+    border: 1Px solid #fafafa;
+    border-radius: 5Px;
+    .card-header{
+      padding: 5Px 5Px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16Px;
+      .order-status{
+        padding: 2Px 5Px;
+        color: #ad0000;
+        background-color: #ffe1e1;
+        border-radius: 5Px;
+        -webkit-border-radius: 5Px;
+        -moz-border-radius: 5Px;
+        -ms-border-radius: 5Px;
+        -o-border-radius: 5Px;
+      }
+    }
+    .card-body{
+      margin: 10Px 0;
+      background-color: #fafafa;
+      padding: 5Px 10Px;
+      .order-list{
+        .order-item{
+          display: flex;
+          .goods-image{
+            width: 88Px;
+            height: 88Px;
+            margin-right: 8Px;
+          }
+          .goods-content{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .goods-name{
+              font-size: 18Px;
+            }
+            .goods-desc{
+              font-size: 14Px;
+              color: #969799;
+            }
+            .goods-number{
+              font-size: 16Px;
+              color: #969799;
+            }
+            .goods-price{
+              font-size: 18Px;
+              float: right;
+            }
+          }
+        }
+      }
+    }
+    .card-footer{
+      margin: 10Px 0;
+      border-top: 2Px solid #f2f2f2;
+      padding: 5Px;
+      .total-info{
+        text-align: right;
+        font-size: 18Px;
+        .total-price{
+          color: #ad0000;
+        }
+      }
+      .button-group{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10Px;
+        .button-item{
+          margin: 0;
+        }
+      }
+    }
+  }
+}
