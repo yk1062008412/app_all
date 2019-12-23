@@ -59,12 +59,12 @@ export default class TabBottom extends Component <any, any> {
             </View>
           </View>
           {
-            container.length ? <View className="tab-shopcar" onClick={this.handleOpenCar.bind(this)}>
-            <View className="shopcar-image">
+            container.length ? <View className="tab-shopcar">
+            <View className="shopcar-image" onClick={this.handleOpenCar.bind(this)}>
               <Image src={ShopCar} className="shopcar-icon" />
             </View>
             <View className="shopcar-info">
-              <View className="shopcar-goods"><text className="shopcar-currency">¥</text>55.35</View>
+              <View className="shopcar-goods" onClick={this.handleOpenCar.bind(this)}><text className="shopcar-currency">¥</text>55.35</View>
               <View className="shopcar-button">选好了</View>
             </View>
           </View> : <View className="tab-shopcar empty">

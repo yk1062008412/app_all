@@ -38,8 +38,8 @@ export default class MyOrder extends Component<any, any> {
       <View className='my-order-container'>
         <View className="my-order-card">
           <View className="card-title">
-            <Text><AtIcon value='bullet-list' size='20' color='#000' className="order-icon"></AtIcon>我的订单</Text>
-            <Text onClick={this.handleOrder.bind(this)}>查看详情<AtIcon value='chevron-right' size='20' color='#000' className="order-icon"></AtIcon></Text>
+            <Text><AtIcon value='bullet-list' size='20' color='#333' className="order-icon"></AtIcon>我的订单</Text>
+            <Text onClick={this.handleOrder.bind(this)}>查看详情<AtIcon value='chevron-right' size='20' color='#333' className="order-icon"></AtIcon></Text>
           </View>
           <View className="card-list">
             <AtGrid
