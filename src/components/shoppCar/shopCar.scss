@@ -3,5 +3,48 @@
     .at-float-layout__container{
       bottom: 50Px;
     }
+    .car-container{
+      .car-header{
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 10Px;
+        border-bottom: 1Px solid #f2f2f2;
+        .car-header-button{
+          margin: 0;
+        }
+      }
+      .car-body{
+        padding-top: 10Px;
+        .car-item{
+          display: flex;
+          margin-bottom: 10Px;
+          .goods-image{
+            width: 50Px;
+            height: 50Px;
+            margin-right: 10Px;
+          }
+          .goods-content{
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .goods-info{
+              .price-info{
+                .now-price{
+                  color: #f55;
+                  margin-right: 10Px;
+                  font-size: 1.2em;
+                }
+                .origin-price{
+                  color: #333;
+                  font-size: 0.8em;
+                  text-decoration: line-through;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
