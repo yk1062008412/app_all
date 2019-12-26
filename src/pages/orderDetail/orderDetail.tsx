@@ -1,5 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import OrderDetailList from '@/components/orderDetailList/orderDetailList'
 import './orderDetail.scss'
 
 export default class OrderDetail extends Component <any, any> {
@@ -7,6 +8,7 @@ export default class OrderDetail extends Component <any, any> {
   constructor (props) {
     super(props)
     this.state = {
+      by: 'add'
     }
   }
 
@@ -14,7 +16,12 @@ export default class OrderDetail extends Component <any, any> {
     navigationBarTitleText: '订单详情'
   }
 
-  componentWillMount () { }
+  componentWillMount () {
+    const { by } = this.$router.params
+    this.setState({
+      by: by
+    })
+  }
 
   componentDidMount () { }
 
@@ -25,9 +32,10 @@ export default class OrderDetail extends Component <any, any> {
   componentDidHide () { }
 
   render () {
+    const { by } = this.state
     return (
       <View className='order-detail-container'>
-        order-detail page!
+        <OrderDetailList status={by} />
       </View>
     )
   }

@@ -1,0 +1,34 @@
+.tabs-container{
+  .goods-list{
+    padding: 0 5Px;
+    .goods-item{
+      display: flex;
+      .goods-image{
+        width: 70Px;
+        height: 70Px;
+        margin-right: 8Px;
+      }
+      .goods-box{
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .goods-info{
+          font-size: 18Px;
+          .price-info{
+            .now-price{
+              color: #f55;
+              margin-right: 5Px;
+              font-size: 18Px;
+            }
+            .origin-price{
+              color: #333;
+              font-size: 16Px;
+              text-decoration: line-through;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+.order-detail-list-container{
+  .address-box{
+    display: flex;
+    align-items: center;
+    padding: 10Px;
+    border-bottom: 10Px solid #fafafa;
+    .address-icon{
+      width: 20Px;
+      padding: 0 5Px;
+    }
+    .address-info{
+      flex: 1;
+      font-size: 16Px;
+      padding: 0 5Px;
+    }
+  }
+  .shop-box{
+    border-bottom: 10Px solid #fafafa;
+    padding: 10Px;
+    .shop-box-header{
+      font-size: 14Px;
+      color: #333;
+      padding-bottom: 10Px;
+      .shop-order-id{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .shop-order-status{
+          padding: 3Px 8Px;
+          color: #ad0000;
+          background-color: #ffe1e1;
+          border-radius: 5Px;
+        }
+      }
+    }
+    .shop-item{
+      display: flex;
+      .shop-image{
+        width: 80Px;
+        height: 80Px;
+        margin-right: 10Px;
+      }
+      .shop-content{
+        flex: 1;
+        position: relative;
+        padding-bottom: 5Px;
+        .shop-name{
+          font-size: 18Px;
+        }
+        .shop-info{
+          .shop-num{
+            display: inline-block;
+            font-size: 16Px;
+          }
+          .shop-price{
+            color: #ff4949;
+            float: right;
+            font-size: 18Px;
+          }
+        }
+        
+      }
+    }
+  }
+  .extend-info{
+    padding: 0 15Px;
+    border-bottom: 10Px solid #fafafa;
+    .add-extend{
+      .picker-value{
+        font-size: 20Px;
+        padding: 5Px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .current-pick-value{
+          font-size: 16Px;
+          text-align: right;
+        }
+      }
+      .order-comment-title{
+        font-size: 20Px;
+        padding: 5Px 0;
+        color: #333;
+        border-top: 1Px solid #fafafa;
+      }
+      .order-comment-area{
+        padding: 5Px 0;
+      }
+    }
+    .look-extend{
+      font-size: 20Px;
+      color: #333;
+      .extend-title{
+        margin-top: 5Px;
+        position: relative;
+        text-indent: 15Px;
+        &::before{
+          content: "";
+          display: inline-block;
+          position: absolute;
+          left: 5Px;
+          top: 6Px;
+          width: 2PX;
+          height: 20Px;
+          background-color: #6190e8;
+          box-shadow: 0 1Px 2Px 0 rgba(97,144,232,.2);
+          border-radius: 1PX;
+        }
+      }
+      .extend-content{
+        margin: 10Px 0;
+      }
+    }
+  }
+  .shop-count{
+    text-align: right;
+    color: #333;
+    font-size: 16Px;
+    padding: 5Px 15Px;
+    .shop-all-price{
+      padding-left: 10Px;
+      color: #ff4949;
+      font-size: 20Px;
+    }
+  }
+  .order-topay{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50Px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 2Px solid #fafafa;
+    box-sizing: border-box;
+    .order-amount{
+      font-size: 16Px;
+      .order-number{
+        font-size: 26Px;
+        color: #ff4949;
+      }
+    }
+    .order-pay-button{
+      height: 100%;
+      background-color: #ff4949;
+      margin-left: 20Px;
+      color: #fafafa;
+      font-size: 20Px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20Px;
+      z-index: 2;
+    }
+  }
+}

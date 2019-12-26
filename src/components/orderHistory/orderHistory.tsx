@@ -31,16 +31,25 @@ export default class OrderHistory extends Component<any, any> {
   }
 
   handlePayment () { // 去支付
-    const params = {
-      timeStamp: '',
-      nonceStr: '',
-      package: '',
-      signType: 'MD5',
-      paySign: ''
-    }
-    Taro.requestPayment(params).then(res => {
-      console.log(res)
+    Taro.showToast({
+      title: '这里是去支付订单按钮',
+      icon: 'none',
+      duration: 2000
     })
+    // const params = {
+    //   timeStamp: '',
+    //   nonceStr: '',
+    //   package: '',
+    //   signType: 'MD5',
+    //   paySign: ''
+    // }
+    // Taro.requestPayment(params).then(res => {
+    //   console.log(res)
+    // })
+  }
+
+  handleOrderDetail () {
+    Taro.navigateTo({ url: '/pages/orderDetail/orderDetail?by=look' })
   }
 
   render() {
@@ -51,7 +60,7 @@ export default class OrderHistory extends Component<any, any> {
             <Text>2019-12-23 15:45:31</Text>
             <Text className='order-status'>待支付</Text>
           </View>
-          <View className='card-body'>
+          <View className='card-body' onClick={this.handleOrderDetail.bind(this)}>
             <View className='order-list'>
               <View className='order-item'>
                 <Image

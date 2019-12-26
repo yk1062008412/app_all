@@ -43,6 +43,10 @@ export default class TabBottom extends Component <any, any> {
     this.props.handleToggleCar()
   }
 
+  handleOpenOrder () { // 点击进入订单详情页
+    Taro.navigateTo({ url: '/pages/orderDetail/orderDetail?by=add' })
+  }
+
   render () {
     const { container } = this.state
     return (
@@ -65,7 +69,7 @@ export default class TabBottom extends Component <any, any> {
             </View>
             <View className="shopcar-info">
               <View className="shopcar-goods" onClick={this.handleOpenCar.bind(this)}><text className="shopcar-currency">¥</text>55.35</View>
-              <View className="shopcar-button">选好了</View>
+              <View className="shopcar-button" onClick={this.handleOpenOrder.bind(this)}>选好了</View>
             </View>
           </View> : <View className="tab-shopcar empty">
             <View className="shopcar-image">

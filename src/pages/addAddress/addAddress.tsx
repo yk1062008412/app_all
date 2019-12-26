@@ -36,9 +36,39 @@ export default class AddAddress extends Component<any, any> {
     console.log(region)
   }
 
-  handleChangeDefault() {
+  handleChangeDefault () {
     this.setState({
       isDefaultAddress: !this.state.isDefaultAddress
+    })
+  }
+
+  handleSaveAddress () { // 保存地址
+    Taro.showToast({
+      title: '保存成功',
+      icon: 'none',
+      duration: 2000
+    })
+    setTimeout(() => {
+      Taro.navigateTo({ url: '/pages/address/address' })
+    }, 2500);
+  }
+
+  handleDeleteAddress () { // 删除地址
+    Taro.showModal({
+      title: '删除地址',
+      content: '您确定要删除地址吗？',
+    })
+    .then(res => {
+      if(res.confirm){
+        Taro.showToast({
+          title: '已删除',
+          icon: 'none',
+          duration: 2000
+        })
+        setTimeout(() => {
+          Taro.navigateTo({ url: '/pages/address/address' })
+        }, 2500);
+      }
     })
   }
 
@@ -75,10 +105,10 @@ export default class AddAddress extends Component<any, any> {
           <AtSwitch title='设置为默认地址' checked={isDefaultAddress} onChange={this.handleChangeDefault.bind(this)} />
           <View className='button-group'>
             <View className='button-group-item'>
-              <AtButton type='primary'>保存地址</AtButton>
+              <AtButton type='primary' onClick={this.handleSaveAddress.bind(this)}>保存地址</AtButton>
             </View>
             <View className='button-group-item'>
-              <AtButton type='secondary'>删除</AtButton>
+              <AtButton type='secondary' onClick={this.handleDeleteAddress.bind(this)}>删除</AtButton>
             </View>
           </View>
         </AtForm>

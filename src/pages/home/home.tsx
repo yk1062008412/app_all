@@ -12,7 +12,7 @@ export default class Home extends Component <any, any> {
     super(props)
     this.state = {
       tabList: [],
-      isOpen: true
+      isOpen: false
     }
   }
 
