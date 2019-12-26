@@ -28,7 +28,7 @@ export default class ShopCar extends Component <any, any> {
   handleClear () {
     Taro.showModal({
       title: '清空购物车',
-      content: '您确定要清空购物车吗？',
+      content: '您确定要清空购物车吗？'
     })
     .then(res => {
       if(res.confirm){
