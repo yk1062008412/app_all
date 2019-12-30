@@ -3,19 +3,27 @@
     padding: 0 5Px;
     .goods-item{
       display: flex;
+      margin: 10Px 0;
       .goods-image{
         width: 70Px;
         height: 70Px;
-        margin-right: 8Px;
+        padding: 10Px 8Px 10Px 0;
       }
       .goods-box{
         flex: 1;
+        font-size: 15Px;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
-        .goods-info{
-          font-size: 18Px;
-          .price-info{
+        .goods-des{
+          color: #999;
+          font-size: 12Px;
+        }
+        .price-info{
+          display: flex;
+          justify-content: space-between;
+          padding-right: 10Px;
+          .price-rate{
             .now-price{
               color: #f55;
               margin-right: 5Px;
@@ -23,8 +31,16 @@
             }
             .origin-price{
               color: #999;
-              font-size: 16Px;
+              font-size: 12Px;
               text-decoration: line-through;
+            }
+          }
+          .goods-number{
+            .count-number{
+              display: inline-block;
+              text-align: center;
+              width: 20Px;
+              padding: 0 3Px;
             }
           }
         }

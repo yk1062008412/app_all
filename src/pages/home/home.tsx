@@ -6,9 +6,9 @@ import TabList from '@/components/tabList/tabList'
 import ShopCar from '@/components/shoppCar/shopCar'
 import './home.scss'
 
-export default class Home extends Component <any, any> {
+export default class Home extends Component<any, any> {
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       tabList: [],
@@ -27,34 +27,40 @@ export default class Home extends Component <any, any> {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount () { }
+  componentWillMount() { }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       tabList: [
-        { title: '标签页1', id: '1'},
-        { title: '标签页2', id: '2'},
-        { title: '标签页3', id: '3'},
-        { title: '标签页4', id: '4'},
-        { title: '标签页5', id: '5'},
-        { title: '标签页6', id: '6'},
+        {
+          title: '限时特惠', id: '6', goods: [
+            { name: '一次性家用纸杯*20', des: '这里是描述区域', id: '12345', originPrice: '20.00', newPrice: '9.90', imgUrl: 'http://j.mp/2Q8GqmG' },
+            { name: '一次性家用纸杯*20', des: '这里是描述区域', id: '12346', originPrice: '20.00', newPrice: '9.90', imgUrl: 'http://j.mp/2Q8GqmG' }
+          ]
+        },
+        { title: '超值套餐', id: '7', goods: [] },
+        { title: '叉子', id: '1', goods: [] },
+        { title: '刀具', id: '2', goods: [] },
+        { title: '纸杯', id: '3', goods: [] },
+        { title: '碗筷', id: '4', goods: [] },
+        { title: '牙签', id: '5', goods: [] }
       ]
     })
   }
 
-  componentWillUnmount () { }
+  componentWillUnmount() { }
 
-  componentDidShow () { }
+  componentDidShow() { }
 
-  componentDidHide () { }
+  componentDidHide() { }
 
-  toggleCar () { // 打开购物车
+  toggleCar() { // 打开购物车
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
 
-  render () {
+  render() {
     const { tabList, isOpen } = this.state
     return (
       <View className='home-container'>

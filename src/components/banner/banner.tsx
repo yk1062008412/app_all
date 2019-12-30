@@ -3,8 +3,8 @@ import { View, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './banner.scss'
 
 import banner1 from '../../static/demo/banner/banner1.png'
-import banner2 from '../../static/demo/banner/banner2.png'
-import banner3 from '../../static/demo/banner/banner3.png'
+// import banner2 from '../../static/demo/banner/banner2.png'
+// import banner3 from '../../static/demo/banner/banner3.png'
 
 export default class Banner extends Component {
   render() {
@@ -23,7 +23,7 @@ export default class Banner extends Component {
             src={banner1}
           />
         </SwiperItem>
-        <SwiperItem className="swiper-item">
+        {/* <SwiperItem className="swiper-item">
           <Image
             className="swiper-image"
             src={banner2}
@@ -34,7 +34,7 @@ export default class Banner extends Component {
             className="swiper-image"
             src={banner3}
           />
-        </SwiperItem>
+        </SwiperItem> */}
       </Swiper>
       </View>
     )

@@ -6,6 +6,10 @@ import './orderDetailList.scss'
 
 export default class OrderDetailList extends Component<any, any> {
 
+  static defaultProps = {
+    state: 'add'
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -49,17 +53,18 @@ export default class OrderDetailList extends Component<any, any> {
   }
 
   handlePayOrder () { // 支付订单
-    Taro.showToast({
-      title: '这里是去支付订单按钮',
-      icon: 'none',
-      duration: 2000
-    })
-    // const params = {
-    //   timeStamp: '',
-    //   nonceStr: '',
-    //   package: '',
+    // Taro.showToast({
+    //   title: '这里是去支付订单按钮',
+    //   icon: 'none',
+    //   duration: 2000
+    // })
+    // const currentTime = +new Date()
+    // const params: any = {
+    //   timeStamp: currentTime + '',
+    //   nonceStr: '5K8264ILTKCH16CQ2502SI8ZNMTM67VS',
+    //   package: 'prepay_id=wx2017033010242291fcfe0db70013231072',
     //   signType: 'MD5',
-    //   paySign: ''
+    //   paySign: `MD5(appId=wx18275049303f7e2f&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS&package=prepay_id=wx2017033010242291fcfe0db70013231072&signType=MD5&timeStamp=${currentTime}&key=qazwsxedcrfvtgbyhnujmikolp111111) = 22D9B4E54AB1950F51E0649E8810ACD6`
     // }
     // Taro.requestPayment(params).then(res => {
     //   console.log(res)
