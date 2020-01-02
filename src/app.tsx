@@ -1,5 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import Home from './pages/home/home'
+import { generateGetCodeUrl, getQueryVariable } from '@/utils/common'
 import './app.scss'
 
 // import shopcar from '@/images/shopcar.png'
@@ -61,6 +62,10 @@ class App extends Component {
     // }
   }
 
+  componentWillMount () {
+    this.weChatAuth()
+  }
+
   componentDidMount () {}
 
   componentDidShow () {}
@@ -68,6 +73,21 @@ class App extends Component {
   componentDidHide () {}
 
   componentDidCatchError () {}
+
+  weChatAuth () {
+    const currentUrl = window.location.href
+    // console.log(currentUrl)
+    // console.log(generateGetCodeUrl(currentUrl))
+    // this.$router.params
+    var code = getQueryVariable('code')
+    if(!code){
+      window.location.href = generateGetCodeUrl(currentUrl)
+    }else{
+      alert(code)
+    }
+    // console.log(this.$router.params)
+    // window.location.href = generateGetCodeUrl(currentUrl)
+  }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
