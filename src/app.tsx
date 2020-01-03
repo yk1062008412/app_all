@@ -1,6 +1,7 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import Home from './pages/home/home'
 import { generateGetCodeUrl, getQueryVariable } from '@/utils/common'
+import { request} from '@/utils/request'
 import './app.scss'
 
 // import shopcar from '@/images/shopcar.png'
@@ -83,7 +84,11 @@ class App extends Component {
     if(!code){
       window.location.href = generateGetCodeUrl(currentUrl)
     }else{
-      alert(code)
+      request('/mine/setMineInfo',{ authCode: code }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
     }
     // console.log(this.$router.params)
     // window.location.href = generateGetCodeUrl(currentUrl)
