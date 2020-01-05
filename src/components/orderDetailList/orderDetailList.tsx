@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Image, Text, Picker } from '@tarojs/components'
 import { AtTextarea } from 'taro-ui'
 import { getNextDate } from '@/utils/common.ts'
+import { request } from '@/utils/request'
 import './orderDetailList.scss'
 
 export default class OrderDetailList extends Component<any, any> {
@@ -53,22 +54,9 @@ export default class OrderDetailList extends Component<any, any> {
   }
 
   handlePayOrder () { // 支付订单
-    // Taro.showToast({
-    //   title: '这里是去支付订单按钮',
-    //   icon: 'none',
-    //   duration: 2000
-    // })
-    // const currentTime = +new Date()
-    // const params: any = {
-    //   timeStamp: currentTime + '',
-    //   nonceStr: '5K8264ILTKCH16CQ2502SI8ZNMTM67VS',
-    //   package: 'prepay_id=wx2017033010242291fcfe0db70013231072',
-    //   signType: 'MD5',
-    //   paySign: `MD5(appId=wx18275049303f7e2f&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS&package=prepay_id=wx2017033010242291fcfe0db70013231072&signType=MD5&timeStamp=${currentTime}&key=qazwsxedcrfvtgbyhnujmikolp111111) = 22D9B4E54AB1950F51E0649E8810ACD6`
-    // }
-    // Taro.requestPayment(params).then(res => {
-    //   console.log(res)
-    // })
+    request('/order/submitOrder', {}).then(res => {
+      console.log(res)
+    })
   }
 
   render() {

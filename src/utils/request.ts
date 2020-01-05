@@ -2,7 +2,7 @@
  * @Author: yk1062008412
  * @Date: 2020-01-03 22:15:13
  * @LastEditors  : yk1062008412
- * @LastEditTime : 2020-01-03 22:36:00
+ * @LastEditTime : 2020-01-04 16:47:05
  * @Description: request
  */
 import Taro from '@tarojs/taro'
@@ -20,7 +20,9 @@ export function request (api: string, params: object) {
       method: 'POST',
       mode: 'cors',
       success (res) {
-        resolve(res)
+        if(res.statusCode === 200){
+          resolve(res.data)
+        }
       },
       fail (err) {
         reject(err)

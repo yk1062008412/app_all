@@ -1,7 +1,7 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import Home from './pages/home/home'
 import { generateGetCodeUrl, getQueryVariable } from '@/utils/common'
-import { request} from '@/utils/request'
+import { request } from '@/utils/request'
 import './app.scss'
 
 // import shopcar from '@/images/shopcar.png'
@@ -64,7 +64,10 @@ class App extends Component {
   }
 
   componentWillMount () {
-    this.weChatAuth()
+    const openid = window.localStorage.getItem('OPENID');
+    if(!openid){
+      this.weChatAuth()
+    }
   }
 
   componentDidMount () {}
@@ -80,18 +83,19 @@ class App extends Component {
     // console.log(currentUrl)
     // console.log(generateGetCodeUrl(currentUrl))
     // this.$router.params
-    var code = getQueryVariable('code')
-    if(!code){
+    var queryCode = getQueryVariable('code')
+    if(!queryCode){
       window.location.href = generateGetCodeUrl(currentUrl)
     }else{
-      request('/mine/setMineInfo',{ authCode: code }).then(res => {
-        console.log(res)
+      request('/mine/setMineInfo',{ authCode: queryCode }).then(({code, data}) => {
+        if(code === 0){
+          window.localStorage.setItem('OPENID', data.openid);
+          console.log(window.localStorage.getItem('OPENID'));
+        }
       }).catch(err => {
         console.log(err)
       })
     }
-    // console.log(this.$router.params)
-    // window.location.href = generateGetCodeUrl(currentUrl)
   }
 
   // 在 App 类中的 render() 函数没有实际作用
