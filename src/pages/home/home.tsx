@@ -5,14 +5,14 @@ import TabBottom from '@/components/tabBottom/tabBottom'
 import TabList from '@/components/tabList/tabList'
 import ShopCar from '@/components/shoppCar/shopCar'
 import './home.scss'
+import { request } from '@/utils/request'
 
 export default class Home extends Component<any, any> {
 
   constructor(props) {
     super(props)
     this.state = {
-      tabList: [],
-      isOpen: false
+      bannerList: []
     }
   }
 
@@ -27,25 +27,11 @@ export default class Home extends Component<any, any> {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount() { }
+  componentWillMount() {
+    this.getBannerList()
+  }
 
   componentDidMount() {
-    this.setState({
-      tabList: [
-        {
-          title: '限时特惠', id: '6', goods: [
-            { name: '一次性家用纸杯*20', des: '这里是描述区域', id: '12345', originPrice: '20.00', newPrice: '9.90', imgUrl: 'http://j.mp/2Q8GqmG' },
-            { name: '一次性家用纸杯*20', des: '这里是描述区域', id: '12346', originPrice: '20.00', newPrice: '9.90', imgUrl: 'http://j.mp/2Q8GqmG' }
-          ]
-        },
-        { title: '超值套餐', id: '7', goods: [] },
-        { title: '叉子', id: '1', goods: [] },
-        { title: '刀具', id: '2', goods: [] },
-        { title: '纸杯', id: '3', goods: [] },
-        { title: '碗筷', id: '4', goods: [] },
-        { title: '牙签', id: '5', goods: [] }
-      ]
-    })
   }
 
   componentWillUnmount() { }
@@ -54,20 +40,27 @@ export default class Home extends Component<any, any> {
 
   componentDidHide() { }
 
-  toggleCar() { // 打开购物车
-    this.setState({
-      isOpen: !this.state.isOpen
+  // 获取Banner数据
+  getBannerList() {
+    request('/home/getBannerList', {}).then(({code, data}) => {
+      if (code === 0) {
+        this.setState({
+          bannerList: data
+        })
+      }
     })
   }
 
   render() {
-    const { tabList, isOpen } = this.state
+    const { bannerList } = this.state
     return (
       <View className='home-container'>
-        <Banner />
-        <TabList tabList={tabList} />
-        <ShopCar carOpen={isOpen} handleToggleCar={this.toggleCar.bind(this)} />
-        <TabBottom handleToggleCar={this.toggleCar.bind(this)} />
+        {
+          bannerList.length ? <Banner bannerData={bannerList} /> : null
+        }
+        <TabList />
+        <ShopCar />
+        <TabBottom />
       </View>
     )
   }

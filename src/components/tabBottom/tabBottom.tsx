@@ -1,26 +1,19 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
+import { inject, observer } from '@tarojs/mobx'
 import './tabBottom.scss'
 
 import HomeSelect from '@/images/home_select.png'
 import Mine from '@/images/mine.png'
 import ShopCar from '@/images/shopcar.png'
 
+@inject('allStore')
+@observer
 export default class TabBottom extends Component <any, any> {
-
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
 
   constructor(props){
     super(props)
     this.state = {
-      container: ['11']
-      // container: []
     }
   }
 
@@ -40,15 +33,20 @@ export default class TabBottom extends Component <any, any> {
   }
 
   handleOpenCar () { // 点击打开购物车
-    this.props.handleToggleCar()
+    const { allStore } = this.props
+    allStore.toggleShopCarStatus()
   }
 
   handleOpenOrder () { // 点击进入订单详情页
-    Taro.navigateTo({ url: '/pages/orderDetail/orderDetail?by=add' })
+    const { allStore } = this.props
+    allStore.saveOrder().then(res => {
+      console.log(res)
+      // Taro.navigateTo({ url: '/pages/orderDetail/orderDetail?by=add' })
+    })
   }
 
   render () {
-    const { container } = this.state
+    const { allStore: {shopcarList, allPrice} } = this.props
     return (
       <View className='tab-bottom-container'>
         <View className='tab-list'>
@@ -63,12 +61,12 @@ export default class TabBottom extends Component <any, any> {
             </View>
           </View>
           {
-            container.length ? <View className="tab-shopcar">
+            shopcarList.length ? <View className="tab-shopcar">
             <View className="shopcar-image" onClick={this.handleOpenCar.bind(this)}>
               <Image src={ShopCar} className="shopcar-icon" />
             </View>
             <View className="shopcar-info">
-              <View className="shopcar-goods" onClick={this.handleOpenCar.bind(this)}><text className="shopcar-currency">¥</text>55.35</View>
+            <View className="shopcar-goods" onClick={this.handleOpenCar.bind(this)}><text className="shopcar-currency">¥</text>{allPrice}</View>
               <View className="shopcar-button" onClick={this.handleOpenOrder.bind(this)}>选好了</View>
             </View>
           </View> : <View className="tab-shopcar empty">

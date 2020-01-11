@@ -2,12 +2,20 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './banner.scss'
 
-import banner1 from '../../static/demo/banner/banner1.png'
-// import banner2 from '../../static/demo/banner/banner2.png'
-// import banner3 from '../../static/demo/banner/banner3.png'
+export default class Banner extends Component<any, any> {
 
-export default class Banner extends Component {
+  static defaultProps = {
+    bannerData: []
+  }
+
+  constructor(props){
+    super(props)
+    this.state = {
+    }
+  }
+
   render() {
+    const { bannerData } = this.props;
     return (
       <View className="banner-container">
         <Swiper
@@ -17,24 +25,18 @@ export default class Banner extends Component {
         indicatorDots
         circular
         autoplay>
-        <SwiperItem className="swiper-item">
-          <Image
-            className="swiper-image"
-            src={banner1}
-          />
-        </SwiperItem>
-        {/* <SwiperItem className="swiper-item">
-          <Image
-            className="swiper-image"
-            src={banner2}
-          />
-        </SwiperItem>
-        <SwiperItem className="swiper-item">
-          <Image
-            className="swiper-image"
-            src={banner3}
-          />
-        </SwiperItem> */}
+          {
+            bannerData.map(item => {
+              return (
+                <SwiperItem className="swiper-item" key={item.banner_id}>
+                  <Image
+                    className="swiper-image"
+                    src={item.banner_img_url}
+                  />
+                </SwiperItem>
+              )
+            })
+          }
       </Swiper>
       </View>
     )
