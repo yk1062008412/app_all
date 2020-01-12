@@ -2,8 +2,8 @@
  * @Author: yk1062008412
  * @Date: 2020-01-11 16:37:30
  * @LastEditors  : yk1062008412
- * @LastEditTime : 2020-01-11 21:47:41
- * @Description: file content
+ * @LastEditTime : 2020-01-12 11:03:27
+ * @Description: 商品，购物车store
  */
 import { observable, computed, action } from 'mobx'
 import { request } from '@/utils/request'
@@ -114,7 +114,6 @@ class AllStore {
     }
     return new Promise(resolve => {
       request('/order/saveOrder', params).then(res => {
-        console.log(res)
         resolve(res)
       })
     })

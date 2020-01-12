@@ -1,11 +1,14 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Image, Text, Picker } from '@tarojs/components'
 import { AtTextarea } from 'taro-ui'
-import { getNextDate } from '@/utils/common.ts'
-import { request } from '@/utils/request'
+import { getNextDate, formatDate } from '@/utils/common.ts'
+import { inject, observer } from '@tarojs/mobx'
 import './orderDetailList.scss'
 
+@inject('orderStore')
+@observer
 export default class OrderDetailList extends Component<any, any> {
+  statusArr: string[]
 
   static defaultProps = {
     state: 'add'
@@ -16,8 +19,11 @@ export default class OrderDetailList extends Component<any, any> {
     this.state = {
       deliveryTimeArr: [],
       deliveryTime: [null, null],
-      comment: ''
+      status: 'add',
+      orderId: '',
+      orderNumber: ''
     }
+    this.statusArr = ['未知', '待付款', '待发货', '已发货', '已完成', '已取消']
   }
 
   componentWillMount () {
@@ -26,9 +32,19 @@ export default class OrderDetailList extends Component<any, any> {
     dateList.push(getNextDate(1))
     dateList.push(getNextDate(2))
     dateList.push(getNextDate(3))
+    const { status, orderId, orderNumber, orderStore } = this.props;
     this.setState({
-      deliveryTimeArr: [dateList, timeList]
+      deliveryTimeArr: [dateList, timeList],
+      status: status,
+      orderId: orderId,
+      orderNumber: orderNumber
     })
+    // 设置订单信息 并 获取订单详情
+    orderStore.setOrderInfo(orderId, orderNumber);
+    if(status === 'add'){
+      // 获取默认地址
+      orderStore.getDefaultAddress();
+    }
   }
 
   onTimeChange (e) {
@@ -49,27 +65,28 @@ export default class OrderDetailList extends Component<any, any> {
     if (status === 'look') {
       return;
     } else {
-      Taro.navigateTo({ url: '/pages/address/address' })
+      Taro.navigateTo({ url: '/pages/address/address?by=add' })
     }
   }
 
   handlePayOrder () { // 支付订单
-    request('/order/submitOrder', {}).then(res => {
-      console.log(res)
-    })
+    const { orderStore } = this.props;
+    orderStore.submitOrder();
   }
 
   render() {
-    const { status } = this.props // 1: add, 2look
-    const { deliveryTime, comment, deliveryTimeArr } = this.state
+    const { status, orderStore: {orderDetail} } = this.props // 1: add, 2look
+    const { deliveryTime, deliveryTimeArr } = this.state
     return (
       <View className='order-detail-list-container'>
         <View className='address-box' onClick={this.handleChangeAddress.bind(this)}>
           <View className='at-icon at-icon-map-pin address-icon'></View>
-          <View className='address-info'>
-            <View>姓名 电话号码</View>
-            <View>地址地址地址地址地址地址</View>
-          </View>
+          {
+            orderDetail.address_id ? <View className='address-info'>
+              <View>{orderDetail.receive_user_name} {orderDetail.tel_phone}</View>
+              <View>{orderDetail.address_info}</View>
+            </View> : <View className='address-add'>还没有地址，请您添加地址哦</View>
+          }
           {
             status === 'add' ? <View className='at-icon at-icon-chevron-right address-icon'></View> : null
           }
@@ -78,37 +95,30 @@ export default class OrderDetailList extends Component<any, any> {
           {
             status === 'look' ? <View className='shop-box-header'>
               <View className='shop-order-id'>
-                <Text>订单号: 201912261809430001</Text>
-                <Text className='shop-order-status'>已完成</Text>
+                <Text>订单号: {orderDetail.order_number}</Text>
+                <Text className='shop-order-status'>{this.statusArr[+orderDetail.order_status]}</Text>
               </View>
             </View> : null
           }
-          <View className='shop-item'>
-            <Image
-              className='shop-image'
-              src='https://dss0.bdstatic.com/6Ox1bjeh1BF3odCf/it/u=3533778697,2586993014&fm=74&app=80&f=PNG&size=f121,121?sec=1880279984&t=1dbed90be2871a78074bf731b6872ed0'
-            />
-            <View className='shop-content'>
-              <View className='shop-name'>商品名称</View>
-              <View className='shop-info'>
-                <View className='shop-num'>×1</View>
-                <View className='shop-price'>¥30.00</View>
-              </View>
-            </View>
-          </View>
-          <View className='shop-item'>
-            <Image
-              className='shop-image'
-              src='https://dss0.bdstatic.com/6Ox1bjeh1BF3odCf/it/u=3533778697,2586993014&fm=74&app=80&f=PNG&size=f121,121?sec=1880279984&t=1dbed90be2871a78074bf731b6872ed0'
-            />
-            <View className='shop-content'>
-              <View className='shop-name'>商品名称</View>
-              <View className='shop-info'>
-                <View className='shop-num'>×1</View>
-                <View className='shop-price'>¥30.00</View>
-              </View>
-            </View>
-          </View>
+          {
+            orderDetail.goodsList ? orderDetail.goodsList.map(item => {
+              return (
+                <View className='shop-item' key={item.order_info_id}>
+                  <Image
+                    className='shop-image'
+                    src={item.goods_img_url}
+                  />
+                  <View className='shop-content'>
+                    <View className='shop-name'>{item.goods_name}</View>
+                    <View className='shop-info'>
+                      <View className='shop-num'>×{item.goods_num}</View>
+                      <View className='shop-price'>¥{item.off_price}</View>
+                    </View>
+                  </View>
+                </View>
+              )
+            }) : null
+          }
         </View>
         <View className='extend-info'>
           {
@@ -122,14 +132,16 @@ export default class OrderDetailList extends Component<any, any> {
                 <View className='picker picker-value'>
                   <Text>配送时间</Text>
                   <Text className='current-pick-value'>
-                    {`${deliveryTimeArr[0][deliveryTime[0]] || ''} ${deliveryTimeArr[1][deliveryTime[1]] || '>'}`}
+                    {
+                      orderDetail.book_time ? orderDetail.book_time : `${deliveryTimeArr[0][deliveryTime[0]] || ''} ${deliveryTimeArr[1][deliveryTime[1]] || '>'}`
+                    }
                   </Text>
                 </View>
               </Picker>
               <View className='order-comment-title'>备注</View>
               <View className='order-comment-area'>
                 <AtTextarea
-                  value={comment}
+                  value={orderDetail.comments}
                   onChange={this.handleCommentChange.bind(this)}
                   maxLength={100}
                   placeholder='请输入备注'
@@ -138,20 +150,20 @@ export default class OrderDetailList extends Component<any, any> {
               </View>
             </View> : <View className='look-extend'>
               <View className='extend-title'>下单日期</View>
-              <View className='extend-content'>2019-12-26 18:10:05</View>
+                  <View className='extend-content'>{orderDetail.order_pay_time ? formatDate(orderDetail.order_pay_time) : ''}</View>
               <View className='extend-title'>配送时间</View>
-              <View className='extend-content'>2019-12-26 下午2:00-4:00</View>
+                  <View className='extend-content'>{orderDetail.book_time || ''}</View>
               <View className='extend-title'>备注</View>
-              <View className='extend-content'>加双筷子</View>
+                  <View className='extend-content'>{orderDetail.comments || ''}</View>
             </View>
           }
         </View>
         <View className='shop-count'>
-          <Text>总计:</Text><Text className='shop-all-price'>¥35.00</Text>
+          <Text>总计:</Text><Text className='shop-all-price'>¥{orderDetail.goods_amount}</Text>
         </View>
         {
           status === 'add' ? <View className='order-topay'>
-            <View className='order-amount'>总计: <Text className='order-number'>¥35.00</Text></View>
+            <View className='order-amount'>总计: <Text className='order-number'>¥{orderDetail.order_amount}</Text></View>
             <View className='order-pay-button' onClick={this.handlePayOrder.bind(this)}>去结算</View>
           </View> : null
         }

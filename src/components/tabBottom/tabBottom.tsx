@@ -39,9 +39,13 @@ export default class TabBottom extends Component <any, any> {
 
   handleOpenOrder () { // 点击进入订单详情页
     const { allStore } = this.props
-    allStore.saveOrder().then(res => {
-      console.log(res)
+    allStore.saveOrder().then(({code, data:{order_id, order_number}}) => {
       // Taro.navigateTo({ url: '/pages/orderDetail/orderDetail?by=add' })
+      if(code === 0){
+        Taro.navigateTo({
+          url: `/pages/orderDetail/orderDetail?by=add&order_id=${order_id}&order_number=${order_number}`
+        })
+      }
     })
   }
 
