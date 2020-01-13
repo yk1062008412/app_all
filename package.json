@@ -9,6 +9,7 @@
     "css": "sass"
   },
   "scripts": {
+    "taro": "npm install && npm install -g @tarojs/cli@1.3.29",
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
