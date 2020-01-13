@@ -1,22 +1,22 @@
 import Taro, { Component, Config } from '@tarojs/taro'
+import { Provider } from '@tarojs/mobx'
 import Home from './pages/home/home'
 import { generateGetCodeUrl, getQueryVariable } from '@/utils/common'
 import { request } from '@/utils/request'
+import allStore from './store/allStore'
+import orderStore from './store/orderStore'
 import './app.scss'
-
-// import shopcar from '@/images/shopcar.png'
-// import shopcarSelect from '@/images/shopcar_select.png'
-// import home from '@/images/home.png'
-// import homeSelect from '@/images/home_select.png'
-// import mine from '@/images/mine.png'
-// import mineSelect from '@/images/mine_select.png'
-
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
+
+const store = {
+  allStore,
+  orderStore
+}
 
 class App extends Component {
 
@@ -90,7 +90,9 @@ class App extends Component {
       request('/mine/setMineInfo',{ authCode: queryCode }).then(({code, data}) => {
         if(code === 0){
           window.localStorage.setItem('OPENID', data.openid);
-          console.log(window.localStorage.getItem('OPENID'));
+          window.localStorage.setItem('__USERHEADERURL', data.head_img_url);
+          window.localStorage.setItem('__USERNICKNAME', data.nickname);
+          window.localStorage.setItem('__USERSYSID', data.user_id);
         }
       }).catch(err => {
         console.log(err)
@@ -102,7 +104,9 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Home />
+      <Provider store={store}>
+        <Home />
+      </Provider>
     )
   }
 }

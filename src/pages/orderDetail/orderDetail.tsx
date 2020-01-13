@@ -17,9 +17,11 @@ export default class OrderDetail extends Component <any, any> {
   }
 
   componentWillMount () {
-    const { by } = this.$router.params
+    const { by, order_id, order_number } = this.$router.params
     this.setState({
-      by: by
+      by: by,
+      orderId: order_id,
+      orderNumber: order_number
     })
   }
 
@@ -32,10 +34,10 @@ export default class OrderDetail extends Component <any, any> {
   componentDidHide () { }
 
   render () {
-    const { by } = this.state
+    const { by, orderId, orderNumber } = this.state
     return (
       <View className='order-detail-container'>
-        <OrderDetailList status={by} />
+        <OrderDetailList status={by} orderId={orderId} orderNumber={orderNumber} />
       </View>
     )
   }

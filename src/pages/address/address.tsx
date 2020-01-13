@@ -27,7 +27,7 @@ export default class Address extends Component <any, any> {
   componentDidHide () { }
 
   handleAddAddress () { // 跳转新增地址页面
-    Taro.navigateTo({ url: '/pages/addAddress/addAddress' })
+    Taro.navigateTo({ url: '/pages/addAddress/addAddress?type=add' })
   }
 
   render () {
