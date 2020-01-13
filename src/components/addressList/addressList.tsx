@@ -19,29 +19,9 @@ export default class AddressList extends Component<any, any> {
 
   componentWillMount() {
     const { by } = this.$router.params
-    const { orderStore } = this.props
     this.setState({
       by: by || 'look'
     })
-    // 获取地址列表
-    orderStore.getAllAddress()
-  }
-
-  componentDidMount() {
-    console.log('cccccccc')
-  }
-
-  componentWillUnmount() {
-    console.log('dddddddd')
-  }
-
-  componentDidShow() {
-    console.log('aaaaa');
-    // const { orderStore } = this.props
-    // orderStore.getAllAddress()
-  }
-  componentDidHide() {
-    console.log('bbbbbbb')
   }
 
   handleEdit (addressId, e) {

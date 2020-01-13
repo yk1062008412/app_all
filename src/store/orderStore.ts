@@ -2,7 +2,7 @@
  * @Author: yk1062008412
  * @Date: 2020-01-12 11:03:11
  * @LastEditors  : yk1062008412
- * @LastEditTime : 2020-01-12 18:26:34
+ * @LastEditTime : 2020-01-14 00:23:39
  * @Description: 订单store
  */
 import { observable, action } from 'mobx'
@@ -30,7 +30,9 @@ class OrderStore {
   setOrderAddress(addressItem) { // 设置订单地址
     Object.assign(this.orderDetail, {
       address_id: addressItem.address_id,
-      address_info: `${addressItem.province} ${addressItem.city} ${addressItem.district} ${addressItem.detail_add}`
+      address_info: `${addressItem.province} ${addressItem.city} ${addressItem.district} ${addressItem.detail_add}`,
+      receive_user_name: addressItem.receive_user_name,
+      tel_phone: addressItem.tel_phone
     })
   }
 
@@ -39,6 +41,10 @@ class OrderStore {
     request('/order/orderDetail', {orderId: this.orderId}).then(({code, data}) => {
       if(code === 0){
         this.orderDetail = data
+        // 如果是待付款状态，并且没有地址信息，则获取默认地址
+        if(+data.order_status === 1 && !data.address_id){
+          this.getDefaultAddress()
+        }
       }
     })
   }
@@ -48,6 +54,12 @@ class OrderStore {
     request('/address/getDefaultAddress',{userId: this.__USERSYSID}).then(({code, data}) => {
       if(code === 0){
         this.defaultAddress = data.length ? data : null
+        Object.assign(this.orderDetail, {
+          address_id: data.address_id,
+          address_info: `${data.province} ${data.city} ${data.district} ${data.detail_add}`,
+          receive_user_name: data.receive_user_name,
+          tel_phone: data.tel_phone
+        })
       }
     })
   }
@@ -62,7 +74,7 @@ class OrderStore {
   }
 
   @action.bound
-  submitOrder() { // 去下单
+  submitOrder(extendparam) { // 去下单
     if(this.orderDetail && !this.orderDetail.address_id){
       Taro.showToast({
         title: '请您先选择收获地址',
@@ -71,6 +83,12 @@ class OrderStore {
       })
       return;
     }
+    Object.assign(this.orderDetail, {...extendparam})
+    request('/order/submitOrder', this.orderDetail).then(({code, data}) => {
+      if(code === 0){
+        console.log(data)
+      }
+    })
   }
 }
 

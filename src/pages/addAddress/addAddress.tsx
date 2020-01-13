@@ -42,7 +42,7 @@ export default class AddAddress extends Component<any, any> {
       })
     }
   }
-
+  
   handleChange (key, val) { // 输入值
     this.setState({
       [key]: val

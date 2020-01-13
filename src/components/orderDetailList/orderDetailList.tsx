@@ -21,7 +21,8 @@ export default class OrderDetailList extends Component<any, any> {
       deliveryTime: [null, null],
       status: 'add',
       orderId: '',
-      orderNumber: ''
+      orderNumber: '',
+      comments: ''
     }
     this.statusArr = ['未知', '待付款', '待发货', '已发货', '已完成', '已取消']
   }
@@ -41,10 +42,6 @@ export default class OrderDetailList extends Component<any, any> {
     })
     // 设置订单信息 并 获取订单详情
     orderStore.setOrderInfo(orderId, orderNumber);
-    if(status === 'add'){
-      // 获取默认地址
-      orderStore.getDefaultAddress();
-    }
   }
 
   onTimeChange (e) {
@@ -56,7 +53,7 @@ export default class OrderDetailList extends Component<any, any> {
 
   handleCommentChange (e) {
     this.setState({
-      comment: e.target.value
+      comments: e.target.value
     })
   }
 
@@ -71,12 +68,17 @@ export default class OrderDetailList extends Component<any, any> {
 
   handlePayOrder () { // 支付订单
     const { orderStore } = this.props;
-    orderStore.submitOrder();
+    const { deliveryTime , comments } = this.state;
+    const extendParam = {
+      book_time: `${deliveryTime[0] ? deliveryTime[0] : ''} ${deliveryTime[1] ? deliveryTime[1] : ''}`,
+      comments: comments
+    }
+    orderStore.submitOrder(extendParam);
   }
 
   render() {
     const { status, orderStore: {orderDetail} } = this.props // 1: add, 2look
-    const { deliveryTime, deliveryTimeArr } = this.state
+    const { deliveryTime, deliveryTimeArr, comments } = this.state
     return (
       <View className='order-detail-list-container'>
         <View className='address-box' onClick={this.handleChangeAddress.bind(this)}>
@@ -141,7 +143,7 @@ export default class OrderDetailList extends Component<any, any> {
               <View className='order-comment-title'>备注</View>
               <View className='order-comment-area'>
                 <AtTextarea
-                  value={orderDetail.comments}
+                  value={comments}
                   onChange={this.handleCommentChange.bind(this)}
                   maxLength={100}
                   placeholder='请输入备注'

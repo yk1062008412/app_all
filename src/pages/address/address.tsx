@@ -2,8 +2,12 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import AddressList from '@/components/addressList/addressList'
+import { inject, observer } from '@tarojs/mobx'
+import orderStore from '@/store/orderStore'
 import './address.scss'
 
+@inject('orderStore')
+@observer
 export default class Address extends Component <any, any> {
 
   constructor (props) {
@@ -22,7 +26,10 @@ export default class Address extends Component <any, any> {
 
   componentWillUnmount () { }
 
-  componentDidShow () { }
+  componentDidShow () {
+    const { orderStore } = this.props
+    orderStore.getAllAddress()
+  }
 
   componentDidHide () { }
 
