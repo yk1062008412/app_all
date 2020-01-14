@@ -68,9 +68,9 @@ export default class OrderDetailList extends Component<any, any> {
 
   handlePayOrder () { // 支付订单
     const { orderStore } = this.props;
-    const { deliveryTime , comments } = this.state;
+    const { deliveryTime , comments, deliveryTimeArr } = this.state;
     const extendParam = {
-      book_time: `${deliveryTime[0] ? deliveryTime[0] : ''} ${deliveryTime[1] ? deliveryTime[1] : ''}`,
+      book_time: `${deliveryTimeArr[0][deliveryTime[0]] || ''} ${deliveryTimeArr[1][deliveryTime[1]] || ''}`,
       comments: comments
     }
     orderStore.submitOrder(extendParam);
@@ -134,9 +134,7 @@ export default class OrderDetailList extends Component<any, any> {
                 <View className='picker picker-value'>
                   <Text>配送时间</Text>
                   <Text className='current-pick-value'>
-                    {
-                      orderDetail.book_time ? orderDetail.book_time : `${deliveryTimeArr[0][deliveryTime[0]] || ''} ${deliveryTimeArr[1][deliveryTime[1]] || '>'}`
-                    }
+                    {deliveryTimeArr[0][deliveryTime[0]] || ''} {deliveryTimeArr[1][deliveryTime[1]] || '>'}
                   </Text>
                 </View>
               </Picker>
