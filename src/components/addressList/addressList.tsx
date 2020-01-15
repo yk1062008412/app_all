@@ -3,7 +3,6 @@ import { View, Text } from '@tarojs/components'
 import { AtTag, AtIcon } from 'taro-ui'
 import { inject, observer } from '@tarojs/mobx'
 import './addressList.scss'
-import orderStore from '@/store/orderStore'
 
 @inject('orderStore')
 @observer

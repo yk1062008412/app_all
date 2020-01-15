@@ -87,7 +87,7 @@ export default class OrderDetailList extends Component<any, any> {
             orderDetail.address_id ? <View className='address-info'>
               <View>{orderDetail.receive_user_name} {orderDetail.tel_phone}</View>
               <View>{orderDetail.address_info}</View>
-            </View> : <View className='address-add'>还没有地址，请您添加地址哦</View>
+            </View> : <View className='address-add'>{ orderDetail.order_status === 5 ? '未选择地址' : '还没有地址，请您添加地址哦' }</View>
           }
           {
             status === 'add' ? <View className='at-icon at-icon-chevron-right address-icon'></View> : null
@@ -150,9 +150,9 @@ export default class OrderDetailList extends Component<any, any> {
               </View>
             </View> : <View className='look-extend'>
               <View className='extend-title'>下单日期</View>
-                  <View className='extend-content'>{orderDetail.order_pay_time ? formatDate(orderDetail.order_pay_time) : ''}</View>
+                  <View className='extend-content'>{orderDetail.order_add_time ? formatDate(orderDetail.order_add_time) : ''}</View>
               <View className='extend-title'>配送时间</View>
-                  <View className='extend-content'>{orderDetail.book_time || ''}</View>
+                  <View className='extend-content'>{orderDetail.book_time || '默认'}</View>
               <View className='extend-title'>备注</View>
                   <View className='extend-content'>{orderDetail.comments || ''}</View>
             </View>

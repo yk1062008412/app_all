@@ -3,7 +3,6 @@ import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import AddressList from '@/components/addressList/addressList'
 import { inject, observer } from '@tarojs/mobx'
-import orderStore from '@/store/orderStore'
 import './address.scss'
 
 @inject('orderStore')

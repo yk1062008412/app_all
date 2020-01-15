@@ -2,15 +2,17 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
 import OrderHistory from '@/components/orderHistory/orderHistory'
+import { inject, observer } from '@tarojs/mobx'
 import './order.scss'
 
+@inject('orderListStore')
+@observer
 export default class Order extends Component<any, any> {
   tabList: { title: string }[]
 
   constructor(props) {
     super(props)
     this.state = {
-      current: 0
     }
     this.tabList = [
       { title: '全部' },
@@ -28,9 +30,8 @@ export default class Order extends Component<any, any> {
 
   componentWillMount() {
     const { orderStatus } = this.$router.params;
-    this.setState({
-      current: +orderStatus
-    })
+    const { orderListStore } = this.props;
+    orderListStore.setCurrentTab(+orderStatus)
   }
 
   componentDidMount() { }
@@ -42,13 +43,12 @@ export default class Order extends Component<any, any> {
   componentDidHide() { }
 
   handleClick(e) {
-    this.setState({
-      current: e
-    })
+    const { orderListStore } = this.props;
+    orderListStore.setCurrentTab(e)
   }
 
   render() {
-    const { current } = this.state
+    const { orderListStore: {current} } = this.props
     return (
       <View className='order-container'>
         <AtTabs
@@ -73,7 +73,7 @@ export default class Order extends Component<any, any> {
             <View><OrderHistory orderStatus={4} /></View>
           </AtTabsPane>
           <AtTabsPane current={current} index={5}>
-            <View><OrderHistory orderStatus={5}/></View>
+            <View><OrderHistory orderStatus={5} /></View>
           </AtTabsPane>
         </AtTabs>
       </View>

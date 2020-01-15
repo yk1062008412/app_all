@@ -5,6 +5,7 @@ import { generateGetCodeUrl, getQueryVariable } from '@/utils/common'
 import { request } from '@/utils/request'
 import allStore from './store/allStore'
 import orderStore from './store/orderStore'
+import orderListStore from './store/orderListStore'
 import './app.scss'
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -15,7 +16,8 @@ import './app.scss'
 
 const store = {
   allStore,
-  orderStore
+  orderStore,
+  orderListStore
 }
 
 class App extends Component {
