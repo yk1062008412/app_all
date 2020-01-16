@@ -2,7 +2,7 @@
  * @Author: yk1062008412
  * @Date: 2019-12-26 19:16:52
  * @LastEditors  : yk1062008412
- * @LastEditTime : 2020-01-12 17:32:26
+ * @LastEditTime : 2020-01-16 21:48:52
  * @Description: common file
  */
 const moment = require('moment');
@@ -24,7 +24,7 @@ export function test() {
   return true
 }
 
-const appId = 'wx574472ef1e2aaebb';
+const appId = 'wx3715770a164499c5';
 export function generateGetCodeUrl(redirectURL: any) {
   const scope = 'snsapi_userinfo'
   // const scope = 'snsapi_base'
