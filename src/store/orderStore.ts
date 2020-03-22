@@ -1,8 +1,8 @@
 /*
  * @Author: yk1062008412
  * @Date: 2020-01-12 11:03:11
- * @LastEditors  : yk1062008412
- * @LastEditTime : 2020-01-14 00:23:39
+ * @LastEditors: yk1062008412
+ * @LastEditTime: 2020-03-22 15:57:36
  * @Description: 订单store
  */
 import { observable, action } from 'mobx'
@@ -51,7 +51,8 @@ class OrderStore {
 
   @action.bound
   getDefaultAddress() { // 获取默认地址(如果没有默认地址，则获取最新一条更新的地址)
-    request('/address/getDefaultAddress',{userId: this.__USERSYSID}).then(({code, data}) => {
+    const userid = window.localStorage.getItem('__USERSYSID');
+    request('/address/getDefaultAddress',{userId: userid}).then(({code, data}) => {
       if(code === 0){
         this.defaultAddress = data.length ? data : null
         Object.assign(this.orderDetail, {

@@ -1,8 +1,8 @@
 /*
  * @Author: yk1062008412
  * @Date: 2019-12-26 19:16:52
- * @LastEditors  : yk1062008412
- * @LastEditTime : 2020-01-16 21:48:52
+ * @LastEditors: yk1062008412
+ * @LastEditTime: 2020-03-22 15:32:41
  * @Description: common file
  */
 const moment = require('moment');
@@ -24,7 +24,8 @@ export function test() {
   return true
 }
 
-const appId = 'wx3715770a164499c5';
+// const appId = 'wx3715770a164499c5'; // appid - xiaoerpeiqi
+const appId = 'wx574472ef1e2aaebb'; // yk测试
 export function generateGetCodeUrl(redirectURL: any) {
   const scope = 'snsapi_userinfo'
   // const scope = 'snsapi_base'
